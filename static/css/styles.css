@@ -2,6 +2,10 @@ body {
     margin-top: 20px;
 }
 
+.text-brown {
+    color: saddlebrown;
+}
+
 .link-to-page {
     float: right;
     margin: 0 2px 0 2px;
