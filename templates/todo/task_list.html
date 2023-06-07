@@ -4,7 +4,7 @@
 {% block content %}
   <h1>
     TODO list
-    <a href="#" class="btn btn-primary link-to-page">Add task</a>
+    <a href="{% url "todo:task-create" %}" class="btn btn-primary link-to-page">Add task</a>
   </h1>
 
   {% for task in task_list %}
