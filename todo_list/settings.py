@@ -31,8 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DEVELOPED_APPS = [
-    "todo"
+    "todo",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
