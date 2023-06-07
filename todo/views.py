@@ -1,13 +1,22 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from todo.forms import TaskForm
 from todo.models import Task
 
 
 class TaskListView(ListView):
     model = Task
     paginate_by = 7
+
+
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "todo/task_form.html"
+    success_url = reverse_lazy("todo:task-list")
 
 
 def task_complete(request, task_id) -> HttpResponse:
