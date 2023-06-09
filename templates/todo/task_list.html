@@ -10,9 +10,9 @@
   {% for task in task_list %}
     <div class="border-bottom mb-4 p-3">
       {% if task.is_done %}
-        <a href="{% url "todo:undo-task" task_id=task.id %}" class="btn btn-secondary link-to-page">Undo</a>
+        <a href="{% url "todo:task-status-update" task_id=task.id %}" class="btn btn-secondary link-to-page">Undo</a>
       {% else %}
-        <a href="{% url "todo:complete-task" task_id=task.id %}" class="btn btn-success link-to-page">Complete</a>
+        <a href="{% url "todo:task-status-update" task_id=task.id %}" class="btn btn-success link-to-page">Complete</a>
       {% endif %}
       <h5>
         {{ task.content }}

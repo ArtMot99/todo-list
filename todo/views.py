@@ -1,6 +1,6 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from todo.forms import TaskForm
@@ -69,15 +69,9 @@ class TagDeleteView(DeleteView):
         return get_object_or_404(Tag, id=tag_id)
 
 
-def task_complete(request, task_id) -> HttpResponse:
-    task = get_object_or_404(Task, id=task_id)
-    task.is_done = True
-    task.save()
-    return redirect("todo:task-list")
-
-
-def task_undo(request, task_id) -> HttpResponse:
-    task = get_object_or_404(Task, id=task_id)
-    task.is_done = False
-    task.save()
-    return redirect("todo:task-list")
+class TaskStatusUpdateView(View):
+    def get(self, request, task_id):
+        task = get_object_or_404(Task, id=task_id)
+        task.is_done = not task.is_done
+        task.save()
+        return redirect("todo:task-list")
