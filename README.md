@@ -28,7 +28,7 @@ Create an .env file in your project root directory and fill it like this:
 ```
 DJANGO_SECRET_KEY=your-secret-key
 DEBUG=1
-ALLOWED_HOSTS=localhost,127.0.0.1
+ALLOWED_HOST=localhost,127.0.0.1
 ```
 
 Please replace **your-secret-key** with your Django secret key.
