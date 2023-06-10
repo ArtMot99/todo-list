@@ -1,5 +1,7 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import DateTimeInput
+from django.utils import timezone
 
 from todo.models import Task
 
@@ -16,3 +18,10 @@ class TaskForm(forms.ModelForm):
         widgets = {
             "deadline": DateTimeInput(),
         }
+
+    def clean_deadline(self):
+        deadline = self.cleaned_data.get("deadline")
+        if deadline and deadline.date() < timezone.now().date():
+            raise ValidationError("The deadline cannot be in the past")
+
+        return deadline
