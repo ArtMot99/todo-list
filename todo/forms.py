@@ -16,7 +16,9 @@ class TaskForm(forms.ModelForm):
             "tags",
         )
         widgets = {
-            "deadline": DateTimeInput(),
+            "deadline": forms.DateInput(
+                attrs={"type": "date", "class": "form-control"}
+            )
         }
 
     def clean_deadline(self):
