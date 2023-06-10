@@ -13,7 +13,7 @@ Follow these steps to install and run the project:
 2. Change to the project directory:\
 ` cd todo-list `
 3. Install and activate the virtual environment:\
-` python3 -m venv venv & source venv/bin/activate `
+` python3 -m venv venv && source venv/bin/activate `
 4. Install dependencies:\
 ` pip install -r requirements.txt `
 5. Make migrations:\
