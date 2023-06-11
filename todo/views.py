@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -23,7 +24,7 @@ class TaskUpdateView(UpdateView):
     form_class = TaskForm
     success_url = reverse_lazy("todo:task-list")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Task:
         task_id = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=task_id)
 
@@ -33,7 +34,7 @@ class TaskDeleteView(DeleteView):
     template_name = "todo/task_confirm_delete.html"
     success_url = reverse_lazy("todo:task-list")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Task:
         task_id = self.kwargs.get("task_id")
         return get_object_or_404(Task, id=task_id)
 
@@ -54,7 +55,7 @@ class TagUpdateView(UpdateView):
     fields = "__all__"
     success_url = reverse_lazy("todo:tag-list")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Tag:
         tag_id = self.kwargs.get("tag_id")
         return get_object_or_404(Tag, id=tag_id)
 
@@ -64,13 +65,13 @@ class TagDeleteView(DeleteView):
     template_name = "todo/tag_confirm_delete.html"
     success_url = reverse_lazy("todo:tag-list")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Tag:
         tag_id = self.kwargs.get("tag_id")
         return get_object_or_404(Tag, id=tag_id)
 
 
 class TaskStatusUpdateView(View):
-    def get(self, request, task_id):
+    def get(self, request, task_id) -> HttpResponse:
         task = get_object_or_404(Task, id=task_id)
         task.is_done = not task.is_done
         task.save()
