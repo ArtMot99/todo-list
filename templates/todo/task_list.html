@@ -24,7 +24,9 @@
       </h5>
       <p class="small">
         Created: {{ task.created_at }}
-        <span class="text-brown">Deadline: {% if task.deadline %}{{ task.deadline }}{% endif %}</span>
+        <span class="text-brown">
+          Deadline: {% if task.deadline %}{{ task.deadline }}{% else %}this task has no deadline.{% endif %}
+        </span>
       </p>
       <p class="text-muted">
         Tags:
