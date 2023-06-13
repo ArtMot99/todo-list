@@ -90,11 +90,16 @@ class ViewTests(TestCase):
         self.assertRedirects(response, reverse("todo:tag-list"))
         self.assertFalse(Tag.objects.filter(id=self.tag.id).exists())
 
-    def test_task_status_update_view(self) -> None:
+    def test_task_status_update_view_with_post_method(self) -> None:
         url = reverse("todo:task-status-update", kwargs={"task_id": self.task.id})
-        response = self.client.get(url)
+        response = self.client.post(url)
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("todo:task-list"))
-        self.task.refresh_from_db()
-        self.assertTrue(self.task.is_done)
+
+    def test_task_status_update_view_get_method_not_allowed(self):
+        response = self.client.get(
+            reverse("todo:task-status-update", kwargs={"task_id": self.task.id})
+        )
+
+        self.assertEqual(response.status_code, 405)
