@@ -10,9 +10,15 @@
   {% for task in task_list %}
     <div class="border-bottom mb-4 p-3">
       {% if task.is_done %}
-        <a href="{% url "todo:task-status-update" task_id=task.id %}" class="btn btn-secondary link-to-page">Undo</a>
+        <form action="{% url 'todo:task-status-update' task_id=task.id %}" method="POST" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary link-to-page">Undo</button>
+        </form>
       {% else %}
-        <a href="{% url "todo:task-status-update" task_id=task.id %}" class="btn btn-success link-to-page">Complete</a>
+        <form action="{% url 'todo:task-status-update' task_id=task.id %}" method="POST" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success link-to-page">Complete</button>
+        </form>
       {% endif %}
       <h5>
         {{ task.content }}
