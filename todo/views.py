@@ -71,16 +71,8 @@ class TagDeleteView(DeleteView):
 
 
 class TaskStatusUpdateView(View):
-    def update_task_status(self, task) -> None:
-        task.is_done = not task.is_done
-        task.save()
-
-    def get(self, request, task_id) -> HttpResponse:
-        task = get_object_or_404(Task, id=task_id)
-        self.update_task_status(task)
-        return redirect("todo:task-list")
-
     def post(self, request, task_id) -> HttpResponse:
         task = get_object_or_404(Task, id=task_id)
-        self.update_task_status(task)
+        task.is_done = not task.is_done
+        task.save()
         return redirect("todo:task-list")
